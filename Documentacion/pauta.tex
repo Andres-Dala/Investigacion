@@ -1,0 +1,267 @@
+\documentclass[peerreview]{IEEEtran}
+\usepackage{cite}
+\usepackage{url}
+\usepackage[utf8]{inputenc}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\newtheorem{theorem}{Teorema}
+
+\begin{document}
+\title{Una metodología para la predicción con modelos SARIMA Bayesianos}
+
+
+\author{Daniel Dala\\
+Departamento de Estadística\\
+Universidad Nacional Aut\'onoma de Honduras\\
+e-mail: daniel.dala@unah.hn
+}
+\date{\today}
+
+\maketitle
+\tableofcontents
+\listoffigures
+\listoftables
+
+\IEEEpeerreviewmaketitle
+\begin{abstract}
+El resumen no solo hace referencia al trabajo reportado, tambi\'en sintetiza el trabajo documentado en aproximadamente 200 palabras. Establece el prop\'osito, reporta la informaci\'on obtenida, provee conclusiones, y recomendacionoes. En esencia, resume los punntos principales del estudio de forma adecuada y precisa. Es importante referirse a los resultados principales obtenidos en tiempo pasado al describir el trabajo realizado.
+\end{abstract}
+
+
+
+
+
+\section{Introducci\'on}
+En la introducci\'on se describle de forma concisa pero con un poco m\'as de detalle el trabajo realizado.
+
+En uno de los p\'arrafos de esta secci\'on se hace especial \'enfasis en la contribuci\'on realizada como parte del trabajo reportado, considerando como punto de partida el problema central que motiv\'o el proyecto de investigaci\'on y las soluciones obtenidas por el autor del documento como resultado del trabajo de investigaci\'on realizado.
+
+Se presentan adem\'as descripciones breves del resto de las secciones del documento.
+
+\section{Defnici\'on del Problema}
+Se presenta un descripci\'on concisa y rigurosa del problema central de estudio.
+
+\section{Preliminares y Notaci\'on}
+
+En esta secci\'on se presentan elementos te\'oricos y de notaci\'on necesarios para iniciar con la comprensi\'on o realizaci\'on del trabajo reportado.
+
+\section{Resultados}
+En esta secci\'on se presentan tanto los resultados preliminares que se obtienen en las fases de avances preliminares del proyecto, como el resultado central del proyecto de investigaci\'on. 
+\subsection{Primer resultado}
+En esta secci\'on se documenta de forma precisa y rigurosa el primer bloque de resultados preliminares.
+\subsection{Segundo resultado}
+En esta secci\'on se documenta de forma precisa y rigurosa el segundo bloque de resultados preliminares.
+\subsection{Tercer resultado}
+En esta secci\'on se documenta de forma precisa y rigurosa el tercer bloque de resultados preliminares.
+\subsection{Resultado Central}
+En esta secci\'on se documenta de forma precisa y rigurosa el resultado central del proyecto.
+
+\section{Algunas Recomendaciones de Documentaci\'on}
+
+Esta secci\'on no se incluir\'a en los reportes, su objetivo es presentar algunas recomendaciones de documentaci\'on de algunos de los elementos que se incluyen con m\'as frecuencia en reportes t\'ecnicos de proyectos de investigaci\'on en matem\'atica.
+
+\subsection{Documentaci\'on de Figuras}
+Es recomendable que las im\'agenes correspondientes a las figuras incorporadas en el documento sean documentadas en formato {\tt *.eps} o {\tt *.png}, un ejemplo de documentaci\'on de figura se presenta en la figura \ref{fig:ejemplo-figura}.
+
+
+\subsection{Documentaci\'on de Tablas}
+
+Un ejemplo de documentaci\'on de tabla se presenta en la Tabla \ref{tab:cuadro-ejemplo}.
+
+\begin{table}
+\centering
+\begin{tabular}{l c c c c c}
+\toprule
+& \multicolumn{5}{c}{Potencia} \\
+\cmidrule(l){2-6}
+N\'umero & 0 & 1 & 2 & 3 & 4\\
+\midrule
+1 & 1 & 1 & 1 & 1 & 1\\
+-1 & 1 & -1 & 1 & -1 & 1\\
+2 & 1 & 2 & 4 & 8 & 16\\
+-2 & 1 & -2 & 4 & -8 & 16\\
+\midrule
+\midrule
+Suma de potencias & 4 & 0 & 10 & 0 & 34\\
+\bottomrule
+\end{tabular}
+\smallskip 
+\caption{Algunos n\'umeros y algunas de sus potencias}
+\label{tab:cuadro-ejemplo}
+\end{table}
+
+Se recomienda por favor evitar documentar tablas utilizando capturas de pantalla de salidas de generadas por programas, como por ejemplo, RStudio. En lugar de capturas de pantalla, documentar tablas utilizando las secuencias de comandos \LaTeX utilizadas en este documento, para mantener los factores de claridad de documentaci\'on de resultados en margen factible.
+
+\subsection{Desarrollo de Tecnolog\'ia Computational}
+
+\subsection{C\'odigo de acceso libre}
+
+En el curso se mantendr\'a una pol\'itica de acceso libre. En el caso de desarrollar tecnolog\'ia computacional como parte del trabajo de investigaci\'on, se recomienda el uso exclusivo de herramientas o lenguajes de c\'odigo de acceso libre, como por ejemplo:
+\begin{itemize}
+\item Python
+\item C/C++
+\item GNU Octave
+\item Julia
+\item R
+\end{itemize}
+
+\subsection{Repositorio de archivos del proyecto}
+
+El repositorio de archivos del proyecto deber\'a estar disponible de forma p\'ublica en GitHub. Informaci\'on para la creaci\'on de repositorios de GitHub est\'a disponible en \cite{GitHub-Docs}.
+
+\subsubsection{Documentaci\'on de c\'odigo fuente}
+
+Preferiblemente no incluir listados de c\'odigo fuente en el reporte. En caso de que el trabajo de su proyecto de investigaci\'on incluya desarrollo de c\'odigo fuente, se recomienda hacer referencia a alg\'un programa demostrativo en el repositorio de archivos de GitHub del proyecto. En caso de ser necesario incluir breves secuencias de comandos, se recomienda utilizar {\tt verbatim}. Por ejemplo:
+
+La operaci\'on $(-2)^3$ puede calcularse en Python utilizando la siguiente secuencia de comandos:
+\begin{verbatim}
+>>> (-2)**3
+-8
+\end{verbatim}
+
+\subsection{Documentaci\'on de Proposiciones y Ecuaciones}
+
+Las ecuaciones deben enumerarse si se hace referencia a ellas, y si no se har\'a referencia a ellas no deber\'an estar enumeradas. 
+\subsubsection*{Ejemplo} Considerando el polinomio definido por la expresi\'on
+\begin{equation*}
+p(z)=z^2-z.
+\end{equation*}
+Es posible observar que si para un polinomio arbitrario $f$ con coeficientes complejos se define el conjunto $Z(f)$ por
+\begin{equation}
+\label{eq:ejemplo}
+Z(f)=\{z\in \mathbb{C}:f(z)=0\},
+\end{equation}
+entonces $Z(p)=\{0,1\}$, con base en la expresi\'on \eqref{eq:ejemplo}.
+
+\subsubsection*{Ejemplo de documentaci\'on de teorema} Considerando el siguiente ejemplo de teorema.
+
+\begin{theorem}\label{thm:teorema-ejemplo}
+Si $p(z)=z^2-z$, entonces $|Z(p)|=2$.
+\end{theorem}
+
+La demostraci\'on del Teorema \ref{thm:teorema-ejemplo} es f\'acil.
+
+\subsection{Citas y Referencias Bibliogr\'aficas} En la secci\'on de referencias de este documento se presentan ejemplos de referencias bibliogr\'aficas con los requerimientos formales m\'inimos requerimientos para este seminario.
+
+\subsubsection*{Ejemplo de cita de libro} En \cite{Linear_Models_book} se presentan elementos de teor\'ia de modelos lineales en el contexto de la teor\'ia de sistemas.
+
+\subsection{M\'as Informaci\'on} Para m\'as informaci\'on sobre \LaTeX e {\tt IEEETrans.cls}, se refiere al lector a \cite{kopka_1999,IEEETran}.
+
+\section{Estructura y Criterios de Evaluaci\'on de Resultados del Trabajo de Investigaci\'on} \label{sec:criterio}
+Aunque esta secci\'on no ser\'a incluida en ninguno de los reportes, se detallar\'an los criterios m\'as importantes de evaluaci\'on de los resultados de investigaci\'on documentados en cada reporte y su correspondiente presentaci\'on de defensa.
+
+\subsection{Criterios generales de evaluaci\'on de defensas de resultados de investigaci\'on:}
+
+\begin{itemize}
+\item Formato: Es recomendable utilizar formato Beamer de \LaTeX, o en su defecto diapositivas elaboradas con alg\'un editor de presentaciones.
+
+\item Manejo del Tema:
+
+\begin{itemize}
+\item Precisi\'on: Es recomendable que los resultados se presenten de forma concisa.
+
+\item Coherencia: Es recomendable que los resultados se presenten de forma coherente.
+
+\item Claridad: Es recomendable que los resultados se presenten con claridad, evitando nomenclatura o conceptos que no son de conocimiento general en el contexto del saber matem\'atico, o que no fueron definidos previamente de forma rigurosa.
+\end{itemize}
+
+
+\item Ortograf\'ia: Es importante seguir las reglas de ortograf\'ia y redacci\'on general al elaborar las diapositivas de cada presentaci\'on de defensa de resultados.
+
+\item Manejo del Tiempo: Es recomendable manejar el tiempo de forma adecuada, sin exceder el tiempo establecido para cada presentaci\'on de defensa. Cada estudiante dispondr\'a de 10 minutos para realizar cada defensa de resultados, en las fechas consideradas en la calendarizaci\'on de actividades, de acuerdo al programa correspondiente que se publicar\'a con anticipaci\'on en el canal de MS Teams de la clase.
+
+\end{itemize}
+
+\subsubsection{Estructura de la presentaci\'on final de defensa de resultados}
+
+\begin{itemize}
+\item Saludo inicial y presentaci\'on del tema.
+\item Planteamiento del problema.
+\item Estrategia o metodolog\'ia de la soluci\'on.
+\item Presentaci\'on de resultados.
+\item Conclusiones.
+\item Agradecimientos (si aplica).
+\end{itemize}
+
+\subsection{Criterios generales de evaluaci\'on de reportes t\'ecnicos:}
+
+\begin{itemize}
+\item Formato: Es recomendable utilizar formato utilizado en este documento cuyo c\'odigo \LaTeX est\'a basado en la documentaci\'on de archivo {\tt IEEEtran.cls}, disponible en \cite{IEEETran}.
+
+\item Documentaci\'on de Trabajo de Investigaci\'on:
+
+\begin{itemize}
+\item Precisi\'on: Es recomendable que los resultados se presenten de forma concisa.
+
+\item Coherencia: Es recomendable que los resultados se presenten de forma coherente.
+
+\item Claridad y Rigor Cient\'ifico: Es recomendable que los resultados se presenten con claridad, evitando nomenclatura o conceptos que no son de conocimiento general en el contexto del saber matem\'atico, o que no fueron definidos previamente de forma rigurosa.
+
+\item \'Etica y Veracidad: Es importante que los resultados est\'an respaldados de forma s\'olida por la evidencia documentada. El plagio en cualquiera de sus formas, no ser\'a permitido y ser\'a seriamente penalizado.
+\end{itemize}
+
+
+\item Ortograf\'ia: Es importante seguir las reglas de ortograf\'ia y redacci\'on general al elaborar las diapositivas de cada presentaci\'on de defensa de resultados.
+
+\end{itemize}
+
+\subsubsection{Estructura del reporte t\'ecnico final del proyecto de investigaci\'on}
+
+\begin{itemize}
+\item P\'agina de t\'itulo, con informaci\'on de autor\'ia y tablas de contenidos. Extensi\'on m\'axima de la versi\'on final: 2 p\'aginas.
+\item Resumen. Extensi\'on m\'axima de la versi\'on final: 350 palabras.
+\item Introducci\'on. Extensi\'on m\'axima de la versi\'on final: una p\'agina.
+\item Preliminares y notaci\'on. Extensi\'on m\'axima de la versi\'on final: 4 p\'aginas.
+\item Resultados. Extensi\'on m\'axima de la versi\'on final: 5 p\'aginas.
+\item An\'alisis e Interpretaci\'on. Extensi\'on m\'axima de la versi\'on final: una p\'agina.
+\item Conclusiones y Recomendaciones. Extensi\'on m\'axima de la versi\'on final: $1/2$ p\'agina.
+\item Trabajo Futuro. Extensi\'on m\'axima de la versi\'on final: $1/2$ p\'agina.
+\item Agradecimientos (si aplica). Extensi\'on m\'axima de la versi\'on final: $1/4$ p\'agina.
+\item Disponibilidad de Datos. Extensi\'on m\'axima de la versi\'on final: $1/4$ p\'agina.
+\item Referencias. Extensi\'on m\'axima: correspondiente a n\'umero de fuentes bibliogr\'aficas.
+\end{itemize}
+
+
+
+\section{An\'alisis e Interpretaci\'on}
+En esta secci\'on se presenta un an\'alisis de los resultados en t\'erminos de los criterios de realizaci\'on o factibilidad establecidos como parte de la formulaci\'on del proyecto.
+
+\section{Conclusiones y Recomendaciones}
+Las conclusiones muestran los resultados concretos derivados del trabajo de investigaci\'on documentado. Es muy importante que las conclusiones est\'e fuertemente respaldadas por los resultados presentados en el documento.
+
+\section{Trabajo Futuro}
+
+Es importante considerar el espacio para posibles oportunidades de mejora o discusi\'on posterior en el caso de resultados cient\'ficamente rigurosos e interesantes pero no definitivos.
+
+\section*{Agradecimientos}
+
+En esta secci\'on pueden presentarse algunos agradecimientos de forma breve y formal.
+
+\section*{Disponibilidad de Datos}
+
+En esta secci\'on se hace referencia al repositorio de GitHub donde los datos o programas utilizados o desarrollados como parte del proyecto de investigaci\'on, est\'an disponibles. El repositorio debe estar documentado como parte de las referencias. 
+
+\subsubsection*{Ejemplo} El conjunto de herramientas SPAAR para c\'omputo de modelos semilineales dispersos de se\~nales en Python, est\'a disponible en \cite{SPAAR}.
+
+Si el lector est\'a familiarizado con {\em BibTeX}, la utilizaci\'on de la herramienta de documentaci\'on bibliogr\'afica {\em BibTex} est\'a autorizada para la elaboraci\'on de reportes de este seminario.
+
+
+\begin{thebibliography}{10}
+\bibitem{kopka_1999}
+H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
+  0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
+
+\bibitem{Linear_Models_book}I. Markovsky, S. Van Huffel, J. C. Willems, B. De Moor (2005). \emph{Exact and Approximate Modeling of Linear Systems: A Behavioral Approach.} SIAM.
+
+\bibitem{IEEETran} M. Shell, \emph{IEEEtran - Document class for IEEE Transactions journals and conferences}, \url{https://www.ctan.org/pkg/ieeetran}
+
+\bibitem{SPAAR} F. Vides, \emph{SPAAR: A Python toolset for semilinear sparse signal modeling and identification.} \url{https://github.com/FredyVides/SPAAR}
+
+\bibitem{GitHub-Docs} GitHub Docs. Crear un repositorio. \url{https://docs.github.com/es/github/getting-started-with-github/quickstart/create-a-repo}.
+
+\end{thebibliography}
+\end{document}

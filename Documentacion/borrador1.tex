@@ -1,0 +1,131 @@
+\documentclass[peerreview]{IEEEtran}
+\usepackage{cite}
+\usepackage{url}
+\usepackage[utf8]{inputenc}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\newtheorem{theorem}{Teorema}
+
+\begin{document}
+\title{Una metodología para la predicción con modelos SARIMA Bayesianos}
+
+
+\author{Daniel Dala\\
+Departamento de Estadística\\
+Universidad Nacional Aut\'onoma de Honduras\\
+e-mail: daniel.dala@unah.hn
+}
+\date{\today}
+
+\maketitle
+\tableofcontents
+\listoffigures
+\listoftables
+
+\IEEEpeerreviewmaketitle
+\begin{abstract}
+El resumen no solo hace referencia al trabajo reportado, tambi\'en sintetiza el trabajo documentado en aproximadamente 200 palabras. Establece el prop\'osito, reporta la informaci\'on obtenida, provee conclusiones, y recomendacionoes. En esencia, resume los punntos principales del estudio de forma adecuada y precisa. Es importante referirse a los resultados principales obtenidos en tiempo pasado al describir el trabajo realizado.
+\end{abstract}
+
+\section{Introducci\'on}
+
+En la introducci\'on se describe de forma concisa pero con un poco m\'as de detalle el trabajo realizado.
+
+En uno de los p\'arrafos de esta secci\'on se hace especial \'enfasis en la contribuci\'on realizada como parte del trabajo reportado, considerando como punto de partida el problema central que motiv\'o el proyecto de investigaci\'on y las soluciones obtenidas por el autor del documento como resultado del trabajo de investigaci\'on realizado.
+
+Se presentan adem\'as descripciones breves del resto de las secciones del documento.
+
+
+\section{Definici\'on del Problema}
+%Dada una serie de tiempo $\{y_t\}$ podemos predecir los elementos $y_{t+h}$ para $h=1,2,..n$ ajustando un modelo SARIMA y mediante el método Box-Jenkins hacer el procedimiento para el análisis y ajuste del mejor modelo, por otra parte si proponemos un modelo SARIMA Bayesiano tiene sentido utilizar otro método para la predicción del mismo, de esta manera buscamos proponer una nueva metodología la cual se adapte desde un enfoque bayesiano al nuevo tipo de modelo, por consiguiente recurrimos al proceso de análisis bayesiano de datos propuesto en \cite{Aki} el cual es una vía factible de hacer el análisis y ajuste del modelo bayesiano, por esta razón la nueva metodología de predicción para modelos SARIMA Bayesianos puede ser vista como una iniciativa de \cite{Aki} y una nueva alternativa para el estudio y predicción de series de tiempo.
+
+Sea el proceso $\{y_t\}$ con $t=1,2,...,n$ una serie de tiempo cualquiera, generalmente se busca predecir con la mayor precisión posible los valores futuros $y_{n+m}$ con $m=1,2,...h$ esto se puede lograr ajustando la serie $\{y_t\}$ a un modelo de predicción SARIMA (Multiplicative seasonal autoregressive integrated moving average), sin embargo es necesario seguir un procedimiento en donde se proponga un modelo SARIMA que se ajuste a la serie luego verificar la precisión del modelo y por ultimo haga la predicción de los valores futuros, de este modo surge la metodología Box-Jenkins la cual muestra cada uno de estos pasos antes mencionados para hacer una predicción precisa.\\
+No obstante si se quiere ajustar la serie a un modelo SARIMA Bayesiano no es factible usar el método Box-Jenkins por tanto el objetivo central de este estudio es proponer una nueva metodología para llevar a cabo el proceso de predicción en modelos SARIMA Bayesianos.\\
+La nueva metodología surge como una iniciativa del \textit{Bayesian Workflow} \cite{Aki}, en donde se expone los pasos a seguir para el análisis bayesiano de datos el cual maneja muy bien la estimación de parámetros de modelos y la incertidumbre en los datos.\\
+Por ultimo, una vez establecido el nuevo método se realizarán tres diferentes pruebas en tres conjuntos de datos que miden el IPC en Honduras de 1980 al 2018, la taza de cambio de divisas entre Alemania y Reino Unido de 1984 a 1991 y la afluencia de turistas en Australia de 1995 al 2015, cada uno de estos conjuntos se encuentran en el paquete $\textit{bayesforecast}$ \cite{bayesforecast}, finalmente con los resultados de dichas pruebas se demostrará la funcionalidad del nuevo método propuesto.
+
+
+\section{Preliminares y Notaci\'on}
+En este estudio denotaremos las series de tiempo como $\{y_t\}$. Una serie de tiempo se dice estacionaria si para cualquier colección finita de la serie, su distribución conjunta se mantiene constante en el tiempo osea:
+\begin{equation*}
+P(y_1,y_2,...,y_n)=P(y_{1+h},y_{2+h},...,y_{n+h})
+\end{equation*}
+no obstante, esta propiedad generalmente no ocurre por lo que usaremos la estacionariedad débil que implica una media y varianza constante a través del tiempo, esto es:
+\begin{equation*}
+\mu(t)=\mu \hspace{0.2cm},\hspace{0.2cm} \sigma^2(t)=\sigma^2
+\end{equation*}
+En dado caso que la serie presente alguna tendencia u oscilaciones periódicas constantes sobre la media del proceso (estacionalidad) se puede hacer una transformación en los datos llamada diferenciación denotada por el operador diferencia:
+\begin{equation*}
+\nabla^dy_t=y_t-y_{t-1}
+\end{equation*}
+Diremos que una serie es diferenciada si al aplicar el operador diferencia se vuelve estacionaria, de manera similar la serie es de diferencias estacionales si al aplicar la diferenciación estacional:
+\begin{equation*}
+\nabla^D_sy_t=y_t-y_{t-s}
+\end{equation*}
+donde $s$ es el periodo estacional, se vuelve estacionaria.
+También diremos que una serie de tiempo es un ruido blanco si es iid y normalmente distribuida con media cero y varianza constante.
+
+\subsection{Modelos ARIMA no estacionales}
+En el análisis de series de tiempo si combinamos los modelos autorregresivos, modelos de medias móviles y la diferenciación obtenemos los modelos ARIMA (Autoregressive Integrated Moving Average) no estacionales denotado por:
+\begin{equation*}
+\text{ARIMA  }(p,d,q) 
+\end{equation*}
+en donde $p,d$ y $q$ son los ordenes del modelo autorregresivo, diferenciación y modelo de medias móviles respectivamente, de manera explicita se expresa como:
+\begin{equation*}
+\nabla^dy_t=c+\sum_{i=1}^p\phi_i\nabla^dy_{t-i}+\sum_{j=1}^q\theta_j\varepsilon_{t-j} + \varepsilon_t
+\end{equation*}
+donde $\varepsilon_t$ es ruido blanco.
+
+\subsection{Modelos ARIMA estacionales}
+Los modelos ARIMA pueden modelar datos con estacionalidad esto se puede lograr agregando parámetros estacionales al modelo y lo denotaremos como:
+$$\text{SARIMA  }(p,d,q)\times(P,D,Q)$$
+ \textit{SARIMA} (Multiplicative seasonal autoregressive integrated moving average) de manera explicita:
+\begin{align*}
+ Z_t  &= c + \sum_{i=1}^p \phi_i Z_{t-i} +\sum_{j=1}^q \theta_j \varepsilon_{t-j}+ \sum_{k=1}^P \Phi_k Z_{t-km}\\ &+\sum_{w=1}^Q \Theta_w \varepsilon_{t-wm}+ \varepsilon_t
+\end{align*}
+$$Z_t = \nabla_m^D\nabla^d y_t,$$
+donde $\varepsilon_t$ es un ruido blanco, los parámetros $(p,d,q)$ y $(P,D,Q)$ representan el orden de la parte no estacional y la parte estacional del modelo respectivamente y $m$ es el periodo de oscilación de la media en los datos.
+
+\subsection{Modelos SARIMA Bayesianos}
+En base a la definición previa de un modelo ARIMA estacional podemos definir un Modelo SARIMA Bayesiano como:
+$$\text{Modelo} \sim SARIMA(p,d,q)_\times(P,D,Q)_m$$
+$$\phi_i \sim priori_{\phi i}, \hspace{0.3cm} i=1,...,p$$
+$$\theta_j \sim priori_{\theta j}, \hspace{0.3cm} j=1,...,q$$
+$$\Phi_k \sim priori_{\Phi k}, \hspace{0.3cm} k=1,...,P$$
+$$\Theta_w \sim priori_{\Theta w}, \hspace{0.3cm} w=1,...,Q$$
+$$\mu_0 \sim \text{priori}_{\mu_0}$$
+$$\sigma_0 \sim \text{priori}_{\sigma_0}$$
+
+
+
+
+
+
+
+
+
+\begin{thebibliography}{10}
+
+\bibitem{forecasting}
+Hyndman, R.J., \& Athanasopoulos, G. (2018). \emph{ Forecasting: principles and practice.} 2nd edition, OTexts: Melbourne, Australia. OTexts.com/fpp2. Accessed on February 17, 2021.
+
+\bibitem{Aki} 
+Andrew Gelman, Aki Vehtari, Daniel Simpson, Charles C. Margossian, Bob Carpenter, Yuling Yao, Lauren Kennedy, Jonah Gabry, Paul-Christian Bürkner, Martin Modrák (2020). \emph{Bayesian Workflow.}, \url{https://arxiv.org/abs/2011.01808} 
+
+\bibitem{stan}
+Carpenter, B., Gelman, A., Hoffman, M., Lee, D., Goodrich, B., Betancourt, M., Brubaker, M., Guo, J., Li, P., \& Riddell, A. (2017). \emph{Stan: A Probabilistic Programming Language.} Journal of Statistical Software, 76(1), 1 - 32. doi: \url{http://dx.doi.org/10.18637/jss.v076.i01}
+
+\bibitem{time_series}
+Hyndman, R., \& Khandakar, Y. (2008). \emph{Automatic Time Series Forecasting: The forecast Package for R.} Journal of Statistical Software, 27(3), 1 - 22. doi: \url{http://dx.doi.org/10.18637/jss.v027.i03}
+
+\bibitem{book_series}
+Robert H. Shumway, David S. Stoffer (2017). \emph{Time Series Analysis and Its Applications} Fourth Edition.
+
+\bibitem{bayesforecast}
+Matamoros A., Cruz C., Dala A., Hyndman R., O'Hara-Wild M. (2021). \emph{\textbf{bayesforecast:} Bayesian Time Series Modeling with Stan} version 1.0.1, \url{https://CRAN.R-project.org/package=bayesforecast}
+\end{thebibliography}
+\end{document}

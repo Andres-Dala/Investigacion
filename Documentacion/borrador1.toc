@@ -1,0 +1,8 @@
+\babel@toc {spanish}{}
+\contentsline {section}{\numberline {I}Introducci\'on}{1}
+\contentsline {section}{\numberline {II}Definici\'on del Problema}{1}
+\contentsline {section}{\numberline {III}Preliminares y Notaci\'on}{1}
+\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-A}}Modelos ARIMA no estacionales}{1}
+\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-B}}Modelos ARIMA estacionales}{2}
+\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-C}}Modelos SARIMA Bayesianos}{2}
+\contentsline {section}{Referencias}{2}
