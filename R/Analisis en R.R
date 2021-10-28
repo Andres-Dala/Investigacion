@@ -1,9 +1,7 @@
 library(tidyverse)
 library(forecast)
-datos1<-read.csv("C:/Users/Andres Dala/Downloads/GlobalLandTemperaturesByCountry.csv")
-datos2<-read.csv("C:/Users/Andres Dala/Downloads/GlobalTemperatures.csv")
-
-honduras<-datos1 %>%
+datos<-read.csv("https://raw.githubusercontent.com/Andres-Dala/Seminario_de_Investigacion_MM700/main/R/LandTemperature.csv")
+honduras<-datos %>%
   filter(Country == "Honduras")
 
 honduras$dt<-as.Date(honduras$dt)
@@ -16,4 +14,4 @@ honduras <- honduras %>%
 
 serie1<-ts(honduras$AverageTemperature, frequency = 12, start = 1980)
 
-autoplot(object = serie1)
+autoplot(object = serie1, main = "Temperatura promedio en Honduras")
