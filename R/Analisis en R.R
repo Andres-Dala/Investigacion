@@ -4,6 +4,7 @@ datos<-read.csv("https://raw.githubusercontent.com/Andres-Dala/Seminario_de_Inve
 # Origen de los datos : 
 #  http://berkeleyearth.org/data/
 #  https://data.world/data-society/global-climate-change-data/workspace/project-summary?agentid=data-society&datasetid=global-climate-change-data
+
 honduras<-datos %>%
   filter(Country == "Honduras")
 
