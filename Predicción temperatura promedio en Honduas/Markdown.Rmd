@@ -71,9 +71,6 @@ gridExtra::grid.arrange(k1,k2,k3, ncol = 1)
 ```
 
 ```{r}
-g1 = autoplot(object = diff(diff(train,12)),
-              main = "Serie diferenciada de temperatura promedio en Honduras", 
-              y = "Celsius", x = "Años")
 g2 = ggacf(y = diff(diff(train,12)))
 g3 = ggpacf(y = diff(diff(train,12)))
 
@@ -84,7 +81,7 @@ Los modelos elegidos son:
 
 ## Modelo 1
 $$
- Temperatura \sim SARIMA(2,1,1)_\times(1,1,1)_{12}\\
+ Temperatura \sim SARIMA(2,1,2)_\times(2,1,0)_{12}\\
  \mu_0 \sim t(0,2.5,7)\\
  \sigma_0 \sim t(7)\\
  ar_1, ma_1 \sim N(0,0.5)\\
@@ -95,7 +92,7 @@ $$
 ## Modelo 2
 
 $$
- Temperatura \sim SARIMA(1,1,1)_\times(1,1,1)_{12}\\
+ Temperatura \sim SARIMA(1,1,0)_\times(1,1,1)_{12}\\
  \mu_0 \sim t(0,2.5,7)\\
  \sigma_0 \sim t(7)\\
  ar_1, ma_1 \sim beta(2,2)\\
