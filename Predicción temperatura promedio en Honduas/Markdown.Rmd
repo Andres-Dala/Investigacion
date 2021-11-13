@@ -23,7 +23,7 @@ knitr::opts_chunk$set(fig.align = "center")
 
 Uno de los ámbitos principales de estudio en las series temporales es la variación del clima. A continuación se predecirá la temperatura promedio en Honduras para el año 2014, esto será utilizando la Metodología de predicción con Modelos SARIMA Bayesianos. El conjunto de datos a estudiar fue extraído de [BERKELEY EARTH](http://berkeleyearth.org/data/), el cual muestra la temperatura promedio del país desde 1980 hasta 2013. En este estudio se propondrán dos modelos distintos elegidos en base al comportamiento observado en los datos y un modelo generado por la función <code>auto.sarima</code> del paquete **bayesforecast**.
 
-```{r}
+```{r,  message=FALSE}
 install.packages(c("forecast","dplyr","ggplot2","tsibble","bayesforecast","cowplot","loo","bayesplot"))
 ```
 
