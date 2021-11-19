@@ -27,7 +27,7 @@ summary(cars)
 
 You can also embed plots, for example:
 
-![](hol_files/figure-gfm/pressure-1.png)<!-- -->
+<img src="Figuras/BJ.png" width="60%" style="display: block; margin: auto;" />
 
 Note that the `echo = FALSE` parameter was added to the code chunk to
 prevent printing of the R code that generated the plot.
