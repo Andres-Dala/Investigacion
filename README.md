@@ -7,6 +7,8 @@ reales es compleja debido a que seleccionar el orden del modelo es una tarea com
 adecuado de dichos modelos, la cual se basa en seis etapas iterativas: *visualización de los datos, selección del modelo, estimación de parámetros, diagnóstico,
 comparación de modelos y predicción*. Dicha metodología se ilustra en la siguiente figura:
 
+![](https://github.com/Andres-Dala/Seminario_de_Investigacion_MM700/blob/main/Figuras/BJ.png ) 
+
 Existen muchos esquemas para el proceso de inferencia, y en los últimos años la inferencia Bayesiana se ha vuelto una alternativa muy utilizada para el 
 análisis de datos con muchas aplicaciones en economía, física, química, psicología, entre otras. Su creciente popularidad se debe a su capacidad de incorporar 
 información externa al modelo mediante una distribución a priori, y actualizar las creencias mediante el Teorema de Bayes. Este enfoque de inferencia en 
