@@ -1,0 +1,294 @@
+---
+title: "Precio de las acciones de Pfizer"
+author: "Andrés Dala"
+date: "26/11/2021"
+output:
+  html_document: 
+    toc: yes
+    toc_float: true
+    smooth_scroll : TRUE
+    theme: cerulean
+    df_print: default
+  pdf_document: default
+editor_options: 
+  chunk_output_type: inline
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(fig.align = "center")
+```
+
+# Introducción
+
+El **precio de apertura** es el precio al que un valor cotiza por primera vez tras la apertura de una bolsa en un día de negociación; por ejemplo, la Bolsa de Valores de Nueva York (NYSE) abre exactamente a las 9:30 a.m., hora del Este. El precio de la primera operación de cualquier acción cotizada es su precio de apertura diario. El precio de apertura es un marcador importante para la actividad comercial de ese día, particularmente para aquellos interesados en medir los resultados a corto plazo, como los operadores diarios.
+El **precio de cierre** generalmente se refiere al último precio al que se negocia una acción durante una sesión de negociación regular. Para muchos mercados de EE. UU. las sesiones comerciales regulares se realizan de 9:30 a.m. a 4:00 p.m. hora del Este. En este estudio realizaremos una predicción del promedio mensual del **precio de cierre** de las acciones de la empresa farmacéutica Pfizer utilizando los datos extraídos de [Kaggle](https://www.kaggle.com/kannan1314/pfizer-stock-price-all-time)
+los cuales también se puede observar en tiempo real en [finance yahoo](https://finance.yahoo.com/quote/PFE/). Estudiaremos tres diferentes modelos, en donde el primero será generado a partir de la función <code>auto.sarima</code> del paquete **bayesforecast** luego tomando como referencia el comportamiento y resultados obtenidos del primer modelo se propondrán los siguientes dos modelos esto con el fin de ir mejorando y optimizando las predicciones hasta obtener una precisión factible en el resultado final.
+
+```{r, message=FALSE}
+library(forecast)
+library(dplyr)
+library(ggplot2)
+library(bayesforecast)
+library(cowplot)
+library(loo)
+library(bayesplot)
+options(mc.cores = parallel::detectCores())
+```
+
+# Visualización de los datos
+
+El conjunto de datos muestra cada uno de los indicadores necesarios para llevar a cabo un control y análisis de los precios de las acciones en el mercado de la empresa Pfizer desde junio de 1972 hasta septiembre del 2021.
+
+```{r, message=FALSE}
+datos<-read.csv("https://raw.githubusercontent.com/Andres-Dala/Seminario_de_Investigacion_MM700/main/Predicci%C3%B3n%20acciones%20de%20Pfizer/Pfizer.csv")
+
+head(datos)
+```
+
+Nos centraremos en el precio de cierre (Close) desde el año 2010 haciendo un promedio mensual de las observaciones, de esta manera la serie de tiempo con que trabajaremos tendrá una frecuencia mensual.
+
+```{r, message=FALSE, warning=FALSE}
+stock <- datos %>%
+  select(Date,Close) %>%
+  mutate(Date = as.Date(Date)) %>%
+  filter(as.numeric(format(Date,"%Y")) >= 2010)
+
+stock$month = lubridate::month(stock$Date)
+stock$year = lubridate::year(stock$Date)
+
+stock<- stock %>%
+  group_by(year,month) %>%
+  summarize(Stock_Mean = mean(Close)) %>%
+  as.data.frame()
+
+serie<-ts(stock$Stock_Mean, frequency = 12, start = 2010)
+
+head(serie)
+```
+
+```{r, message=FALSE}
+autoplot(serie) + stat_smooth(method = "lm") + 
+  labs(x= "Años", y ="Precio de cierre promedio mensual")
+```
+
+Al graficar los datos podemos observar una clara tendencia creciente, de esta manera una opción viable para ajustar un modelo es utilizando **Regresión con errores ARIMA**, para una mayor compresión del mismo se recomienda leer : [Dynamic regression. models](https://otexts.com/fpp2/dynamic.html) Dada la naturaleza del estudio y por fines prácticos solamente tendremos en cuenta la información del conjunto de datos, por consiguiente los modelos a proponer tendrán la forma:
+
+$$ y_t = \beta_0+\beta_1x_t+\eta_t$$
+
+donde $\eta_t$ es un modelo $SARIMA(p,d,q)\times(P,D,Q)$ Bayesiano.
+Para empezar, tomaremos el 95% de los datos como el conjunto de entrenamiento el cual de aquí en adelante llamaremos datos y el resto de ellos será el conjunto de prueba el cual usaremos para la comparación de los modelos.
+
+```{r}
+train = head(serie, round(length(serie) * 0.95))
+h = length(serie) - length(train)
+test = tail(serie, h)
+```
+
+# Modelo 1
+
+## Selección y ajuste del modelo
+
+Iniciamos calculando el primer modelo con la función <code>auto.sarima</code> 
+
+```{r}
+sf1 <- auto.sarima(train,  xreg = as.matrix(1:134, nrow = 134))
+
+prior_summary(sf1)
+```
+
+Como podemos observar la función propone un modelo AR(1) para los errores, además de las respectivas distribuciones a priori para cada uno de los parámetros.
+
+## Evaluación de la inferencia
+
+```{r}
+sf1
+```
+
+Como se puede observar en el resumen de las inferencias, cada uno de los parámetros cumple con el estadístico de convergencia de esta manera la inferencia es factible.
+
+```{r,fig.height=10}
+sf1Pars = data.frame(extract_stan(sf1,pars = c("mu0","sigma0","ar","breg")))
+sf1Pars = cbind(Chain = sort(rep(1:4,1000)),sf1Pars)
+
+mcmc_combo(sf1Pars)
+```
+
+Además, se observa que al graficar las distribuciones de las inferencias no se muestra presencia de multimodalidad y también las cadenas se acoplan bien unas con otras lo que comprueba la convergencia antes presentada.
+
+## Diagnóstico del modelo
+
+```{r}
+check_residuals(sf1)
+```
+
+La serie de los residuos muestra que el modelo no representa bien los datos en el periodo entre 2019 y 2021 esto por la alta volatilidad que se presenta en estos años, lo que también se muestra en las gráficas de la distribución y cuantiles que presentan colas pesadas, sin embargo, los gráficos ACF y PACF muestran una baja correlación, de esta manera asumiremos que el modelo se mantiene en un margen factible, no obstante esto no indica que presente buenas predicciones.
+
+```{r}
+Residuals1 = predictive_error(sf1)
+Residuals1 = Residuals1[1:100,]
+
+ppc_dens_overlay(y = rnorm(134),yrep = data.matrix(Residuals1))
+```
+
+```{r}
+autoplot(sf1)+labs(title = "Verificación Predictiva Posteriori", y="Precio de cierre promedio")
+```
+
+Al observar los dos gráficos anteriores se observa que los errores en efecto se comportan normalmente y además el ajuste del modelo es bastante cercano a los datos.
+
+# Modelo 2
+
+## Selección del modelo
+
+En el modelo anterior se propuso un modelo AR(1) para los errores, sin embargo, se puede visualizar en la variación de los datos que una diferenciación podría ayudar a obtener una mayor precisión en el modelo así que inicialmente propondremos el mismo modelo agregando una diferenciación.
+
+$$\text{Modelo 2: } y^{'}_t = \beta_1x^{'}_t+\eta^{'}_t \\
+\eta_t \sim ARIMA(1,1,0)\\
+ \mu_0 \sim t(0,2.5,6) \\
+ \sigma_0 \sim t(7)\\
+ ar \sim N(0,0.5) \hspace{0.3cm} i=1,2\\
+ \beta_1 \sim t(0,2.5,6)$$
+
+## Ajuste del modelo
+
+```{r}
+sf2 <- stan_sarima(train, order = c(1,1,0), xreg = as.matrix(1:134, nrow = 134))
+```
+
+```{r}
+sf2
+```
+
+## Evaluación de la inferencia
+
+```{r,fig.height=10}
+sf2Pars = data.frame(extract_stan(sf2, pars = c("mu0","sigma0","ar","breg")))
+sf2Pars = cbind(Chain = sort(rep(1:4,1000)),sf2Pars)
+
+mcmc_combo(sf2Pars)
+```
+
+Como era de esperarse, los parámetros se encuentran en margen factible dado que solo se agregó una diferenciación.
+
+
+## Diagnóstico del modelo
+
+```{r}
+check_residuals(sf2)
+```
+
+Al observar la serie de los residuos, se puede apreciar el mismo problema en el periodo 2019-2021 en donde el modelo no representa correctamente los datos y de igual manera existe presencia de colas pesadas y una baja autocorrelación.
+
+```{r}
+Residuals2 = predictive_error(sf2)
+Residuals2 = Residuals2[1:100,]
+
+ppc_dens_overlay(y = rnorm(134), yrep = data.matrix(Residuals2))
+```
+
+```{r}
+autoplot(sf2) + labs(title = "Verificación Predictiva Posteriori", y = "Precio de cierre promedio")
+```
+
+Al observar de cerca la Verificación Predictiva Posteriori se puede notar que hay un mejor ajuste de los datos que el modelo anterior lo que indica que la diferenciación era necesaria, y dado que los gráficos ACF y PACF no muestran señales de agregar un modelo MA(q) podemos implementar el modelo con un modelo SAR(P).
+
+# Modelo 3
+
+## Selección del modelo
+
+$$\text{Modelo 3:   } y^{'}_t = \beta_1x^{'}_t+\eta^{'}_t \\
+\eta_t \sim ARIMA(1,1,0)\times(1,0,0)_{12} \\
+ \mu_0 \sim t(0,2.5,6) \\
+ \sigma_0 \sim t(7)\\
+ ar, sar \sim N(0,0.5) \hspace{0.3cm} i=1,2\\
+ \beta_1 \sim t(0,2.5,6)$$
+ 
+ 
+Para este último modelo se propone agregar una componente autorregresiva estacional, de esta manera intentaremos modelar mejor algún comportamiento estacional que hayamos pasado por alto.
+
+## Ajuste del modelo
+
+```{r}
+sf3 <- stan_sarima(train, order = c(1,1,0), seasonal = c(1,0,0), xreg =as.matrix(1:134, nrow = 134))
+```
+
+## Evaluación de la inferencia
+
+```{r}
+sf3
+```
+
+```{r,fig.height=10}
+sf3Pars = data.frame(extract_stan(sf3, pars = c("mu0","sigma0","ar","sar","breg")))
+sf3Pars = cbind(Chain = sort(rep(1:4,1000)),sf3Pars)
+
+mcmc_combo(sf3Pars)
+```
+
+Hasta el momento cada uno de los modelos ha presentado inferencias convergentes lo cual era de esperarse de manera intuitiva dado que las distribuciones a priori son las mismas para todos, sin embargo, esto no siempre se cumplirá.
+
+## Diagnóstico del modelo
+
+```{r}
+check_residuals(sf3)
+```
+
+Al observar la serie de los residuos y notar el mismo problema de los anteriores modelos podemos pensar en tomar vías alternas para modelar esos periodos de tiempo, no obstante, en este estudio nos mantendremos en una modelación totalmente con modelos SARIMA.
+
+```{r}
+Residuals3 = predictive_error(sf3)
+Residuals3 = Residuals3[1:100,]
+
+ppc_dens_overlay(y = rnorm(134), yrep = data.matrix(Residuals3))
+```
+
+```{r}
+autoplot(sf3) + labs(title = "Verificación Predictiva Posteriori", y = "Precio de cierre promedio")
+```
+
+# Comparación de modelos
+
+```{r}
+forecast1 <- forecast(object =  sf1, h = 7, xreg = matrix(134+1:7, ncol = 1))
+pred <- ts(forecast1$mean, frequency = 12, start = c(2021,3))
+forecast2 <- forecast(object =  sf2, h= 7, xreg = matrix(134+1:7, ncol = 1))
+pred2 <- ts(forecast2$mean, frequency = 12, start = c(2021,3))
+forecast3 <- forecast(object =  sf3, h = 7, xreg = matrix(134+1:7, ncol = 1))
+pred3 <- ts(forecast3$mean, frequency = 12, start = c(2021,3))
+
+co<-data.frame("Modelo 3" = pred, "Modelo 2" = pred2, 
+               "Modelo 1" = pred3, "C Prueba" = test)
+
+comb<-ts(co, frequency = 12, start = c(2021,3))
+
+autoplot(comb[,c("Modelo.1", "Modelo.2","Modelo.3", "C.Prueba")]) +
+  ylab("Precio de cierre mensual promedio") + xlab("Años") 
+
+```
+
+En la gráfica anterior se observa claro que el modelo 1 no predice correctamente el conjunto de prueba, por otro lado, los modelos 2 y 3 presentan las predicciones más cercanas, no obstante si recordamos al inicio del estudio se mencionó que no se tomaría en cuenta factores externos en dicho estudio las cuales podrían ser las variables suficientes para presentar una mejora en las predicciones, sin embargo, por efectos de practicidad nos mantendremos con los resultados obtenidos dado que el objeto principal del análisis es analizar si el método presenta resultados factibles a la hora de predecir valores futuros. Luego para concluir las pruebas mediante CV-LOO analizamos la precisión de los modelos:
+
+```{r, warning=FALSE, message=FALSE}
+train2<-ts(train[-1], frequency = 12, start = c(1980,2))
+sf1<-stan_sarima(train2, order = c(1,0,0), xreg = as.matrix(1:133, ncol = 1))
+loo1 <- loo(sf1)
+loo2 <- loo(sf2)
+loo3 <- loo(sf3)
+
+loo_compare(loo1,loo2,loo3)
+```
+Se puede observar que el modelo 3 presenta una mayor precisión que el resto, sin embargo, la diferencia con el modelo 2 es mínima (-1.5) lo cual ya habíamos observado en el gráfico anterior. Finalmente, procedemos a hacer la predicción final de los datos con el modelo 3:
+
+# Predicción Final
+
+```{r, message=FALSE, warning=FALSE}
+sf4<-stan_sarima(serie, order = c(1,1,0), seasonal = c(1,0,0), xreg = as.matrix(1:141, ncol = 1))
+forecast4<-forecast(object =  sf4, h = 5, xreg = matrix(141+1:5, ncol = 1))
+
+autoplot(forecast4) + labs(title = "Predicción final", y = "Precio de cierre promedio mensual",
+                            x = "Años")  + xlim(2019,2023) 
+```
+
+
+
