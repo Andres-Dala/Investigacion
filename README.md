@@ -1,3 +1,7 @@
+# Resumen
+
+El Método Box-Jenkins muestra un conjunto de pasos para realizar predicciones en series temporales con modelos ARIMA mediante un enfoque frecuentista. En este estudio exponemos una adaptación de dicho método a un enfoque Bayesiano. Para la estimación de los parámetros utilizamos inferencia Bayesiana aproximando la distribución a posteriori de los modelos mediante  métodos de Markov Chain Monte Carlo. Para el diagnóstico de los modelos se analiza el comportamiento y distribución de los errores que siguen un supuesto de ruido blanco Gaussiano y para la comparación de modelos se miden las diferencias en la precisión de las predicciones usando validación cruzada y comparando las predicciones en un conjunto de prueba.  Finalmente, mostramos el desempeño de la metodología propuesta con dos ejemplos, primero en la predicción de la temperatura promedio mensual en Honduras y segundo la predicción del precio de cierre mensual en las acciones de la empresa Pfizer.  
+
 # Definición del problema
 
 Una de las aplicaciones más importantes en el análisis de serie temporales es la predicción, esto es, estimar valores futuros que generalmente son desconocidos,
