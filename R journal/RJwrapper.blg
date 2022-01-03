@@ -1,0 +1,64 @@
+This is BibTeX, Version 0.99d
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: RJwrapper.aux
+Reallocating 'name_of_file' (item size: 1) to 9 items.
+The style file: abbrvnat.bst
+Reallocating 'name_of_file' (item size: 1) to 12 items.
+Database file #1: daniel-dala.bib
+Warning--entry type for "stan" isn't style-file defined
+--line 110 of file daniel-dala.bib
+Warning--entry type for "berkeley" isn't style-file defined
+--line 439 of file daniel-dala.bib
+Warning--entry type for "kaggle" isn't style-file defined
+--line 453 of file daniel-dala.bib
+Warning--empty year in ADF
+Warning--there's a number but no series in rob
+Warning--empty publisher in BDA
+Warning--empty publisher in cv-time
+Warning--empty publisher in regresion
+Warning--empty year in kaggle
+Warning--empty year in berkeley
+Warning--empty publisher in metodobox
+Warning--empty year in Stan
+You've used 36 entries,
+            2773 wiz_defined-function locations,
+            824 strings with 10433 characters,
+and the built_in function-call counts, 15808 in all, are:
+= -- 1374
+> -- 952
+< -- 36
++ -- 327
+- -- 288
+* -- 1262
+:= -- 2486
+add.period$ -- 145
+call.type$ -- 36
+change.case$ -- 197
+chr.to.int$ -- 33
+cite$ -- 81
+duplicate$ -- 704
+empty$ -- 1279
+format.name$ -- 354
+if$ -- 3301
+int.to.chr$ -- 4
+int.to.str$ -- 1
+missing$ -- 36
+newline$ -- 223
+num.names$ -- 144
+pop$ -- 460
+preamble$ -- 1
+purify$ -- 168
+quote$ -- 0
+skip$ -- 533
+stack$ -- 0
+substring$ -- 307
+swap$ -- 64
+text.length$ -- 11
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 341
+warning$ -- 9
+while$ -- 122
+width$ -- 0
+write$ -- 529
+(There were 12 warnings)

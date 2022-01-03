@@ -1,0 +1,255 @@
+\begin{thebibliography}{36}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Akaike(1974)]{akaike}
+H.~Akaike.
+\newblock A new look at the statistical model identification.
+\newblock \emph{IEEE Transactions on Automatic Control}, 19\penalty0
+  (6):\penalty0 716--723, 1974.
+\newblock \doi{10.1109/TAC.1974.1100705}.
+
+\bibitem[Bogdan and Stefan(2014)]{ref3}
+O.~Bogdan and C.~Stefan, Cristian.
+\newblock Time series forecasting using neural networks.
+\newblock \emph{CoRR}, abs/1401.1333, 2014.
+\newblock URL \url{http://arxiv.org/abs/1401.1333}.
+
+\bibitem[Box and Jenkins(1970{\natexlab{a}})]{MLE}
+G.~Box and G.~M. Jenkins.
+\newblock \emph{Time Series Analysis: Forecasting and Control}, chapter~7.
+\newblock Holden-Day, 1970{\natexlab{a}}.
+
+\bibitem[Box and Jenkins(1970{\natexlab{b}})]{boxjen}
+G.~Box and G.~M. Jenkins.
+\newblock \emph{Time Series Analysis: Forecasting and Control}.
+\newblock Holden-Day, 1970{\natexlab{b}}.
+
+\bibitem[Chaired()]{ADF}
+R.~R. Chaired.
+\newblock Unit root tests.
+\newblock University of Washington.
+\newblock URL
+  \url{https://faculty.washington.edu/ezivot/econ584/notes/unitroot.pdf}.
+
+\bibitem[Dimitriou-Fakalou(2011)]{yule2}
+C.~Dimitriou-Fakalou.
+\newblock Yule-walker estimation for the moving-average model.
+\newblock \emph{International Journal of Stochastic Analysis}, 2011:\penalty0
+  151823, Aug 2011.
+\newblock ISSN 2090-3332.
+\newblock \doi{10.1155/2011/151823}.
+\newblock URL \url{https://doi.org/10.1155/2011/151823}.
+
+\bibitem[Durbin and Koopman(2012)]{rob}
+J.~Durbin and S.~Koopman.
+\newblock \emph{Time Series analysis by state space methods}.
+\newblock Number Second Edition. Oxford University press, 2012.
+
+\bibitem[Epps and Pulley(1983)]{Epps}
+T.~W. Epps and L.~B. Pulley.
+\newblock A test for normality based on the empirical characteristic function.
+\newblock \emph{Biometrika}, 70\penalty0 (3):\penalty0 723--726, 1983.
+\newblock ISSN 00063444.
+\newblock URL \url{http://www.jstor.org/stable/2336512}.
+
+\bibitem[Gabry and Mahr(2021)]{bayesplot}
+J.~Gabry and T.~Mahr.
+\newblock bayesplot: Plotting for bayesian models, 2021.
+\newblock URL \url{https://mc-stan.org/bayesplot/}.
+\newblock R package version 1.8.1.
+
+\bibitem[Gabry et~al.(2019)Gabry, Simpson, Vehtari, Betancourt, and
+  Gelman]{visualization}
+J.~Gabry, D.~Simpson, A.~Vehtari, M.~Betancourt, and A.~Gelman.
+\newblock Visualization in bayesian workflow.
+\newblock \emph{Journal of the Royal Statistical Society: Series A (Statistics
+  in Society)}, 182\penalty0 (2):\penalty0 389--402, 2019.
+\newblock \doi{https://doi.org/10.1111/rssa.12378}.
+\newblock URL
+  \url{https://rss.onlinelibrary.wiley.com/doi/abs/10.1111/rssa.12378}.
+
+\bibitem[Gelman et~al.(2020)Gelman, Vehtari, Simpson, Margossian, Carpenter,
+  Yao, Kennedy, Gabry, Bürkner, and Modrák]{Aki}
+A.~Gelman, A.~Vehtari, D.~Simpson, C.~C. Margossian, B.~Carpenter, Y.~Yao,
+  L.~Kennedy, J.~Gabry, P.-C. Bürkner, and M.~Modrák.
+\newblock Bayesian workflow, 2020.
+\newblock URL \url{https://arxiv.org/abs/2011.01808}.
+
+\bibitem[Gelman et~al.(2021)Gelman, Carlin, Stern, Dunson, Vehtari, and
+  Rubin]{BDA}
+A.~Gelman, J.~B. Carlin, H.~S. Stern, D.~B. Dunson, A.~Vehtari, and D.~B.
+  Rubin.
+\newblock \emph{Bayesian Data Analysis}, chapter~11.
+\newblock 2021.
+
+\bibitem[Hyndman(2002{\natexlab{a}})]{arima}
+R.~J. Hyndman.
+\newblock \emph{ARIMA processes}, chapter Informed Student Guide to Management
+  Science.
+\newblock Hans Daellenbach and Robert Flood, 2002{\natexlab{a}}.
+\newblock URL \url{https://robjhyndman.com/papers/ARIMA.pdf}.
+
+\bibitem[Hyndman(2002{\natexlab{b}})]{box}
+R.~J. Hyndman.
+\newblock \emph{Box-Jenkins modelling}, chapter Informed Student Guide to
+  Management Science.
+\newblock Hans Daellenbach and Robert Flood, 2002{\natexlab{b}}.
+\newblock URL \url{https://robjhyndman.com/papers/BoxJenkins.pdf}.
+
+\bibitem[Hyndman and Athanasopoulos(2018)]{sarima}
+R.~J. Hyndman and G.~Athanasopoulos.
+\newblock \emph{Forecasting: principles and practice}, chapter 8.9.
+\newblock OTexts Melbourne, Australia, 2 edition, 2018.
+\newblock URL \url{https://otexts.com/fpp2/seasonal-arima.html}.
+
+\bibitem[Hyndman and Athanasopoulos(2021{\natexlab{a}})]{cv-time}
+R.~J. Hyndman and G.~Athanasopoulos.
+\newblock \emph{Forecasting: principles and practice}, chapter 5.10.
+\newblock 3 edition, 2021{\natexlab{a}}.
+\newblock URL \url{https://otexts.com/fpp3/tscv.html}.
+
+\bibitem[Hyndman and Athanasopoulos(2021{\natexlab{b}})]{regresion}
+R.~J. Hyndman and G.~Athanasopoulos.
+\newblock \emph{Forecasting: principles and practice}, chapter~10.
+\newblock 3 edition, 2021{\natexlab{b}}.
+\newblock URL \url{https://otexts.com/fpp3/dynamic.html}.
+
+\bibitem[Kaggle()]{kaggle}
+Kaggle.
+\newblock Pfizer stock price (all time).
+\newblock URL
+  \url{https://www.kaggle.com/kannan1314/pfizer-stock-price-all-time}.
+
+\bibitem[Kwiatkowski et~al.(1992)Kwiatkowski, Phillips, Schmidt, and
+  Shin]{KPSS}
+D.~Kwiatkowski, P.~C. Phillips, P.~Schmidt, and Y.~Shin.
+\newblock Testing the null hypothesis of stationarity against the alternative
+  of a unit root: How sure are we that economic time series have a unit root?
+\newblock \emph{Journal of Econometrics}, 54\penalty0 (1):\penalty0 159--178,
+  1992.
+\newblock ISSN 0304-4076.
+\newblock \doi{https://doi.org/10.1016/0304-4076(92)90104-Y}.
+\newblock URL
+  \url{https://www.sciencedirect.com/science/article/pii/030440769290104Y}.
+
+\bibitem[LJUNG and BOX(1978)]{Lijung-test}
+G.~M. LJUNG and G.~E.~P. BOX.
+\newblock {On a measure of lack of fit in time series models}.
+\newblock \emph{Biometrika}, 65\penalty0 (2):\penalty0 297--303, 08 1978.
+\newblock ISSN 0006-3444.
+\newblock \doi{10.1093/biomet/65.2.297}.
+\newblock URL \url{https://doi.org/10.1093/biomet/65.2.297}.
+
+\bibitem[Lobato and Velasco(2004)]{LV}
+I.~N. Lobato and C.~Velasco.
+\newblock A simple test of normality for time series.
+\newblock \emph{Econometric Theory}, 20\penalty0 (4):\penalty0 671--689, 2004.
+\newblock ISSN 02664666, 14694360.
+\newblock URL \url{http://www.jstor.org/stable/3533541}.
+
+\bibitem[Lopes et~al.(2015)Lopes, Jacob, and Wainwright]{rp}
+M.~E. Lopes, L.~J. Jacob, and M.~J. Wainwright.
+\newblock A more powerful two-sample test in high dimensions using random
+  projection, 2015.
+
+\bibitem[Lotri{\v{c}} and Dobnikar(1999)]{ref4}
+U.~Lotri{\v{c}} and A.~Dobnikar.
+\newblock Using smoothing splines in time series prediction with neural
+  networks.
+\newblock In \emph{Artificial Neural Nets and Genetic Algorithms}, pages
+  121--126, Vienna, 1999. Springer Vienna.
+\newblock ISBN 978-3-7091-6384-9.
+
+\bibitem[Magnusson et~al.(2020)Magnusson, Andersen, Jonasson, and Vehtari]{loo}
+M.~Magnusson, M.~R. Andersen, J.~Jonasson, and A.~Vehtari.
+\newblock Leave-one-out cross-validation for bayesian model comparison in large
+  data, 2020.
+\newblock URL \url{https://arxiv.org/abs/2001.00980}.
+
+\bibitem[Mahdi(2016)]{test}
+E.~Mahdi.
+\newblock Portmanteau test statistics for seasonal serial correlation in time
+  series models.
+\newblock \emph{SpringerPlus}, 5, 2016.
+\newblock URL \url{https://doi.org/10.1186/s40064-016-3167-4}.
+
+\bibitem[Matamoros et~al.(2021)Matamoros, Nieto-Reyes, Hyndman, O'Hara-Wild,
+  and A.]{nortstest}
+A.~A. Matamoros, A.~Nieto-Reyes, R.~Hyndman, M.~O'Hara-Wild, and T.~A.
+\newblock nortstest: Assessing normality of stationary process, 2021.
+\newblock URL \url{https://CRAN.R-project.org/package=nortsTest}.
+\newblock R package version 1.0.3.
+
+\bibitem[Muller and Muller()]{berkeley}
+R.~Muller and E.~Muller.
+\newblock Berkeley earth.
+\newblock URL \url{http://berkeleyearth.org}.
+
+\bibitem[Roberts et~al.(2013)Roberts, Osborne, Ebden, Reece, Gibson, and
+  Aigrain]{ref5}
+S.~Roberts, M.~Osborne, M.~Ebden, S.~Reece, N.~Gibson, and S.~Aigrain.
+\newblock Gaussian processes for time-series modelling.
+\newblock \emph{Phil. Trans. R. Soc. A.3712011055020110550}, 2013.
+\newblock URL \url{http://doi.org/10.1098/rsta.2011.0550}.
+
+\bibitem[Shumway and Stoffer(2017)]{acf}
+R.~H. Shumway and D.~S. Stoffer.
+\newblock \emph{Time Series Analysis and Its Applications}, chapter 3.3.
+\newblock Springer International Publishing, 4 edition, 2017.
+
+\bibitem[Speagle(2020)]{MCMC}
+J.~S. Speagle.
+\newblock A conceptual introduction to markov chain monte carlo methods, 2020.
+\newblock URL \url{https://arxiv.org/abs/1909.12313}.
+
+\bibitem[Spyros G.~Makridakis(1998)]{metodobox}
+R.~J.~H. Spyros G.~Makridakis, Steven C.~Wheelwright.
+\newblock \emph{Forecasting Methods and Applications}, chapter~7.
+\newblock 1998.
+
+\bibitem[Stoica et~al.(1988)Stoica, Friedlander, and Söderström]{yule1}
+P.~Stoica, B.~Friedlander, and T.~Söderström.
+\newblock A high-order yule-walker method for estimation of the ar parameters
+  of an arma model.
+\newblock \emph{Systems \& Control Letters}, 11\penalty0 (2):\penalty0 99--105,
+  1988.
+\newblock ISSN 0167-6911.
+\newblock \doi{https://doi.org/10.1016/0167-6911(88)90082-5}.
+\newblock URL
+  \url{https://www.sciencedirect.com/science/article/pii/0167691188900825}.
+
+\bibitem[Taylor and Letham(2017)]{ref2}
+S.~Taylor and B.~Letham.
+\newblock Forecasting at scale.
+\newblock \emph{PeerJ Preprints 5:e3190v2}, 2017.
+\newblock URL \url{https://doi.org/10.7287/peerj.preprints.3190v2}.
+
+\bibitem[Team()]{Stan}
+T.~S.~D. Team.
+\newblock Stan.
+\newblock URL \url{https://mc-stan.org/}.
+
+\bibitem[Vehtari et~al.(2016)Vehtari, Gelman, and Gabry]{waic}
+A.~Vehtari, A.~Gelman, and J.~Gabry.
+\newblock Practical bayesian model evaluation using leave-one-out
+  cross-validation and waic.
+\newblock \emph{Statistics and Computing}, 27\penalty0 (5):\penalty0
+  1413–1432, Aug 2016.
+\newblock ISSN 1573-1375.
+\newblock \doi{10.1007/s11222-016-9696-4}.
+\newblock URL \url{https://arxiv.org/pdf/1507.04544.pdf}.
+
+\bibitem[Vehtari et~al.(2020)Vehtari, Gabry, Magnusson, Yao, Bürkner,
+  Paananen, and Gelman]{loo_package}
+A.~Vehtari, J.~Gabry, M.~Magnusson, Y.~Yao, P.-C. Bürkner, T.~Paananen, and
+  A.~Gelman.
+\newblock loo: Efficient leave-one-out cross-validation and waic for bayesian
+  models, 2020.
+\newblock URL \url{https://mc-stan.org/loo/}.
+\newblock R package version 2.4.1.
+
+\end{thebibliography}
